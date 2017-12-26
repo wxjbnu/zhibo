@@ -38,7 +38,7 @@
       <view class="title" slot="title">直播平台</view>
       <!-- <list></list> -->
       <repeat for="{{list}}" index="index" item="item" key="key">
-        <view class="flex">
+        <view class="flex" @tap="showDetail" id="{{item.id}}">
           <view class="" style="text-align: center;">{{ item.title }}</view>
           <image class="icon" src="{{ item.icon }}" background-size="cover"/>
         </view>
@@ -84,9 +84,9 @@
       setTimeoutTitle: '标题三秒后会被修改',
       count: 0,
       list: [
-        {title: '斗鱼', icon: '../images/dy.jpg'},
-        {title: '熊猫', icon: '../images/xm.jpg'},
-        {title: '映客', icon: '../images/yk.jpg'}
+        {title: '斗鱼', icon: '../images/dy.jpg', id: 'dy'},
+        {title: '熊猫', icon: '../images/xm.jpg', id: 'xm'},
+        {title: '映客', icon: '../images/yk.jpg', id: 'yk'}
       ],
       netrst: ''
     }
@@ -113,6 +113,11 @@
       },
       tap () {
         console.log('do noting from ' + this.$name)
+      },
+      showDetail (e) {
+        console.log(e.currentTarget.id)
+        this.$navigate('./detail', {a: 1, b: 2, id: e.currentTarget.id})
+        // console.log(e) navigate redirect
       },
       communicate () {
         console.log(this.$name + ' tap')

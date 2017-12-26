@@ -1,0 +1,122 @@
+<style lang="less">
+  .userinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .userinfo-avatar {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+  }
+
+  .userinfo-nickname {
+    color: #aaa;
+  }
+
+  .icon{
+    width: 180rpx;
+    height: 180rpx;
+    border-radius: 90rpx;
+    border: 1px solid yellow;
+  }
+
+</style>
+<template>
+  <view class="container">
+
+    <panel>
+      <view class="title" slot="title">平台信息</view>
+      <!-- <list></list> -->
+      <view>
+        <image class="icon" src="{{ '../images/' + dataInfo.id + '.jpg' }}" background-size="cover"/>
+      </view>
+      <view>
+        平台：{{dataInfo.name}}
+      </view>
+      <view>
+        规则：{{dataInfo.rule}}
+      </view>
+    </panel>
+
+    <toast />
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  // import List from '../components/list'
+  import Panel from '../components/panel'
+  // import Counter from '../components/counter'
+  // import Group from '../components/group'
+  import Toast from 'wepy-com-toast'
+  import testMixin from '../mixins/test'
+
+  export default class Detail extends wepy.page {
+    config = {
+      navigationBarTitleText: 'tool'
+    }
+    components = {
+      panel: Panel,
+      // counter1: Counter,
+      // counter2: Counter,
+      // list: List,
+      // group: Group,
+      toast: Toast
+    }
+
+    mixins = [testMixin]
+
+    data = {
+      mynum: 20,
+      userInfo: {
+        nickName: '加载中...'
+      },
+      dataInfo: {
+        id: 'dy'
+      }
+    }
+
+    computed = {
+      now () {
+        return +new Date()
+      }
+    }
+
+    methods = {
+
+    }
+
+    events = {
+      'index-emit': (...args) => {
+        let $event = args[args.length - 1]
+        console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
+      }
+    }
+
+    onLoad(params, data) {
+      let self = this
+      console.log(params)
+      if (params.id === 'dy') {
+        this.dataInfo = {
+          id: params.id,
+          name: '斗鱼',
+          rule: '使用鱼蛋，鱼翅'
+        }
+      } else if (params.id === 'xm') {
+        this.dataInfo = {
+          id: params.id,
+          name: '熊猫',
+          rule: '使用猫币'
+        }
+      } else if (params.id === 'yk') {
+        this.dataInfo = {
+          id: params.id,
+          name: '映客',
+          rule: '使用金币'
+        }
+      }
+    }
+  }
+</script>
