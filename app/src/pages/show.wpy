@@ -30,8 +30,9 @@
       <view class="userinfo-nickname">{{ userInfo.nickName }}</view>
     </view>
 
-      <image style="width: 100%;" class="" src="{{ bgimg }}" background-size="cover"/>
+    <image style="width: 100%;" class="" src="{{ bgimg }}" background-size="cover"/>
 
+    <button open-type="share"> 分享</button>
     <toast />
   </view>
 </template>
