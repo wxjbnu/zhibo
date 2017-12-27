@@ -4,10 +4,9 @@
     margin-top: 20rpx;
     text-align: left;
     font-size: 12px;
-    padding-top: 20rpx;
-    padding-left: 50rpx;
-    padding-bottom: 20rpx;
+    padding: 20rpx 0;
     border: 1px solid #ccc;
+    box-sizing: border-box;
 
     .title {
       padding-bottom: 20rpx;
