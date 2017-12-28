@@ -29,20 +29,14 @@
 </style>
 <template>
   <view class="container">
-    <view class="userinfo" @tap="handleViewTap">
+    <!-- <view class="userinfo" @tap="handleViewTap">
       <image class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"/>
       <view class="userinfo-nickname">{{ userInfo.nickName }}</view>
-    </view>
+    </view> -->
 
     <panel>
-      <view class="title" slot="title">直播平台</view>
+      <view class="title" slot="title">计算器</view>
       <!-- <list></list> -->
-      <repeat for="{{list}}" index="index" item="item" key="key">
-        <view class="flex" @tap="showDetail" id="{{item.id}}">
-          <view class="" style="text-align: center;">{{ item.title }}</view>
-          <image class="icon" src="{{ item.icon }}" background-size="cover"/>
-        </view>
-      </repeat>
 
       
     </panel>
