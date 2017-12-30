@@ -20,7 +20,8 @@ export default class extends wepy.app {
       'pages/tool',
       'pages/detail',
       'pages/show',
-      'pages/questionnaire'
+      'pages/questionnaire',
+      'pages/info'
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -45,8 +46,8 @@ export default class extends wepy.app {
       }, {
         selectedIconPath: 'images/tool.png',
         iconPath: 'images/tool_default.png',
-        pagePath: 'pages/tool',
-        text: '小工具'
+        pagePath: 'pages/info',
+        text: '我'
       }]
     }
   }

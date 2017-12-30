@@ -1,81 +1,83 @@
 <style lang="less">
-  .userinfo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .userinfo-avatar {
-    width: 80rpx;
-    height: 80rpx;
-    border-radius: 50%;
-  }
-
-  .userinfo-nickname {
-    color: #aaa;
-  }
-
-  .icon{
-    width: 180rpx;
-    height: 180rpx;
-    border-radius: 90rpx;
-    border: 1px solid yellow;
-  }
-  .flex{
-    display: flex;
-    flex-direction: row;
-  }
-
-  .label-1, .label-2{
-    margin-bottom: 15px;
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.label-1__text, .label-2__text {
-    display: inline-block;
-    vertical-align: middle;
+
+.userinfo-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.icon {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 90rpx;
+  border: 1px solid yellow;
+}
+.flex {
+  display: flex;
+  flex-direction: row;
+}
+
+.label-1,
+.label-2 {
+  margin-bottom: 15px;
+}
+.label-1__text,
+.label-2__text {
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .label-1__icon {
-    position: relative;
-    margin-right: 10px;
-    display: inline-block;
-    vertical-align: middle;
-    width: 18px;
-    height: 18px;
-    background: #2f3f02;
+  position: relative;
+  margin-right: 10px;
+  display: inline-block;
+  vertical-align: middle;
+  width: 18px;
+  height: 18px;
+  background: #2f3f02;
 }
 
 .label-1__icon-checked {
-    position: absolute;
-    top: 3px;
-    left: 3px;
-    width: 12px;
-    height: 12px;
-    background: #1aad19;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 12px;
+  height: 12px;
+  background: #1aad19;
 }
 .label-2__icon {
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 10px;
-    width: 18px;
-    height: 18px;
-    background: #2f3f02;
-    border-radius: 50px;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  width: 18px;
+  height: 18px;
+  background: #2f3f02;
+  border-radius: 50px;
 }
 
 .label-2__icon-checked {
-    position: absolute;
-    left: 3px;
-    top: 3px;
-    width: 12px;
-    height: 12px;
-    background: #1aad19;
-    border-radius: 50%;
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 12px;
+  height: 12px;
+  background: #1aad19;
+  border-radius: 50%;
 }
 
-.label-4_text{
-    text-align: center;
-    margin-top: 15px;
+.label-4_text {
+  text-align: center;
+  margin-top: 15px;
 }
 </style>
 <template>
@@ -87,42 +89,12 @@
 
       <view class="" style="padding: 0 20rpx;" hidden="{{qindex == 1 ? false : true}}">
         <view>1.你是什么性格</view>
-        <radio-group class="group" bindchange="radioChange">
-          <repeat for="{{radioItems}}"
-            key="index"
-            index="index"
-            item="item">
-            <view class="label-2">
-              <radio id="{{item.name}}"
-                value="{{item.name}}"
-                checked="{{item.checked}}"></radio>
-              <!-- <view class="label-2__icon">
-                <view class="label-2__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
-              </view> -->
-              <label class="label-2__text" for="{{item.name}}"><text>{{item.name}}</text></label>
-            </view>
-          </repeat>
-        </radio-group>
+        <comradio :radioItems="radioItems" @radioChange.user="radioChange1" />
       </view>
 
       <view class="" style="padding: 0 20rpx;" hidden="{{qindex == 2 ? false : true}}">
         <view>2.你想做什么</view>
-        <radio-group class="group" bindchange="radioChange">
-          <repeat for="{{radioItems1}}"
-            key="index"
-            index="index"
-            item="item">
-            <view class="label-2">
-              <radio id="{{item.name}}"
-                value="{{item.name}}"
-                checked="{{item.checked}}"></radio>
-              <!-- <view class="label-2__icon">
-                <view class="label-2__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
-              </view> -->
-              <label class="label-2__text" for="{{item.name}}"><text>{{item.name}}</text></label>
-            </view>
-          </repeat>
-        </radio-group>
+        <comradio1 :radioItems="radioItems1" @radioChange.user="radioChange1" />
       </view>
 
       <view class=" flex" style="padding: 20rpx;">
@@ -131,6 +103,7 @@
       </view>
 
     </panel>
+    <!-- <list /> -->
 
     <view style="padding: 20rpx 30%;" hidden="{{qindex != 2}}">
       <button type="primary" bindtap="gen">生成我的主页</button>
@@ -141,125 +114,140 @@
 </template>
 
 <script>
-  import wepy from 'wepy'
-  // import List from '../components/list'
-  import Panel from '../components/panel'
-  // import Counter from '../components/counter'
-  // import Group from '../components/group'
-  import Toast from 'wepy-com-toast'
-  import testMixin from '../mixins/test'
+import wepy from "wepy";
+import List from '../components/rankinglist'
+import Panel from "../components/panel";
+import ComRadio from "../components/comRadio";
+// import Counter from '../components/counter'
+// import Group from '../components/group'
+import Toast from "wepy-com-toast";
+import testMixin from "../mixins/test";
 
-  export default class Questionnaire extends wepy.page {
-    config = {
-      navigationBarTitleText: 'tool'
+export default class Questionnaire extends wepy.page {
+  config = {
+    navigationBarTitleText: "tool"
+  };
+  components = {
+    panel: Panel,
+    comradio: ComRadio,
+    comradio1: ComRadio,
+    // counter1: Counter,
+    // counter2: Counter,
+    list: List,
+    // group: Group,
+    toast: Toast
+  };
+
+  mixins = [testMixin];
+
+  data = {
+    mynum: 20,
+    userInfo: {
+      nickName: "加载中..."
+    },
+    qindex: 1, // 题目序号
+    dataInfo: {
+      id: "dy"
+    },
+    radioItems: {
+      id: "r0",
+      list: [
+        { name: "USA", value: "美国" },
+        { name: "CHN", value: "中国", checked: "true" },
+        { name: "BRA", value: "巴西" },
+        { name: "JPN", value: "日本" },
+        { name: "ENG", value: "英国" },
+        { name: "TUR", value: "法国" }
+      ]
+    },
+    radioItems1: {
+      id: "r1",
+      list: [{ name: "zb", value: "主播" }, { name: "kk", value: "粉丝" }]
+    },
+    hidden: false
+  };
+
+  computed = {
+    now() {
+      return +new Date();
     }
-    components = {
-      panel: Panel,
-      // counter1: Counter,
-      // counter2: Counter,
-      // list: List,
-      // group: Group,
-      toast: Toast
-    }
+  };
 
-    mixins = [testMixin]
-
-    data = {
-      mynum: 20,
-      userInfo: {
-        nickName: '加载中...'
-      },
-      qindex: 1, // 题目序号
-      dataInfo: {
-        id: 'dy'
-      },
-      radioItems: [
-        {name: 'USA', value: '美国'},
-        {name: 'CHN', value: '中国', checked: 'true'},
-        {name: 'BRA', value: '巴西'},
-        {name: 'JPN', value: '日本'},
-        {name: 'ENG', value: '英国'},
-        {name: 'TUR', value: '法国'}
-      ],
-      radioItems1: [
-        {name: 'zb', value: '主播'},
-        {name: 'kk', value: '粉丝'}
-      ],
-      hidden: false
-    }
-
-    computed = {
-      now () {
-        return +new Date()
+  methods = {
+    radioChange1(e) {
+      console.log(e);
+      console.log(e.detail.value);
+    },
+    prevQuestion() {
+      if (this.qindex === 1) {
+        return;
       }
-    }
+      this.qindex = this.qindex - 1;
+    },
+    nextQuestion() {
+      this.qindex = this.qindex + 1;
+    },
+    radioChange(e) {
+      console.log(e);
 
-    methods = {
-      prevQuestion() {
-        if (this.qindex === 1) {
-          return
-        }
-        this.qindex = this.qindex - 1
-      },
-      nextQuestion() {
-        this.qindex = this.qindex + 1
-      },
-      radioChange (e) {
-        var checked = e.detail.value
-        var changed = {}
-        for (var i = 0; i < this.data.radioItems.length; i++) {
-          if (checked.indexOf(this.data.radioItems[i].name) !== -1) {
-            changed['radioItems[' + i + '].checked'] = true
-          } else {
-            changed['radioItems[' + i + '].checked'] = false
-          }
-        }
-        this.setData(changed)
-      },
-      toast () {
-        let promise = this.$invoke('toast', 'show', {
-          title: '自定义标题',
-          img: 'https://raw.githubusercontent.com/kiinlam/wetoast/master/images/star.png'
-        })
-
-        promise.then((d) => {
-          console.log('toast done')
-        })
-      },
-      gen() {
-        this.$navigate('./show', {a: 1, b: 2})
-      }
-    }
-
-    events = {
-      'index-emit': (...args) => {
-        let $event = args[args.length - 1]
-        console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
-      }
-    }
-
-    onLoad(params, data) {
-      let self = this
-      console.log(params)
-      if (params.id === 'dy') {
-        this.dataInfo = {
-          id: params.id,
-          name: '斗鱼',
-          rule: '使用鱼蛋，鱼翅'
-        }
-      } else if (params.id === 'xm') {
-        this.dataInfo = {
-          id: params.id,
-          name: '熊猫',
-          rule: '使用猫币'
-        }
-      } else if (params.id === 'yk') {
-        this.dataInfo = {
-          id: params.id,
-          name: '映客',
-          rule: '使用金币'
+      var checked = e.detail.value;
+      var changed = {};
+      for (var i = 0; i < this.data.radioItems.length; i++) {
+        if (checked.indexOf(this.data.radioItems[i].name) !== -1) {
+          changed["radioItems[" + i + "].checked"] = true;
+        } else {
+          changed["radioItems[" + i + "].checked"] = false;
         }
       }
+      this.setData(changed);
+    },
+    toast() {
+      let promise = this.$invoke("toast", "show", {
+        title: "自定义标题",
+        img:
+          "https://raw.githubusercontent.com/kiinlam/wetoast/master/images/star.png"
+      });
+
+      promise.then(d => {
+        console.log("toast done");
+      });
+    },
+    gen() {
+      this.$navigate("./show", { a: 1, b: 2 });
+    }
+  };
+
+  events = {
+    "index-emit": (...args) => {
+      let $event = args[args.length - 1];
+      console.log(
+        `${this.$name} receive ${$event.name} from ${$event.source.$name}`
+      );
+    }
+  };
+
+  onLoad(params, data) {
+    let self = this;
+    console.log(params);
+    if (params.id === "dy") {
+      this.dataInfo = {
+        id: params.id,
+        name: "斗鱼",
+        rule: "使用鱼蛋，鱼翅"
+      };
+    } else if (params.id === "xm") {
+      this.dataInfo = {
+        id: params.id,
+        name: "熊猫",
+        rule: "使用猫币"
+      };
+    } else if (params.id === "yk") {
+      this.dataInfo = {
+        id: params.id,
+        name: "映客",
+        rule: "使用金币"
+      };
     }
   }
+}
 </script>

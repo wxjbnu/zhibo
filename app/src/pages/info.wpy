@@ -1,0 +1,145 @@
+<style lang="less">
+  .userinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .userinfo-avatar {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+  }
+
+  .userinfo-nickname {
+    color: #aaa;
+  }
+
+  .icon{
+    width: 180rpx;
+    height: 180rpx;
+    border-radius: 90rpx;
+    border: 1px solid yellow;
+  }
+
+  .flex{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+  .link{
+    border-bottom: 1px solid;
+    color: #33e;
+  }
+</style>
+<template>
+  <view class="container" style="padding: 0 20rpx;">
+    <!-- <view class="userinfo" @tap="handleViewTap">
+      <image class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"/>
+      <view class="userinfo-nickname">{{ userInfo.nickName }}</view>
+    </view> -->
+    <view>个人信息</view>
+    <view class="flex">
+      <text>预计你的日收入：</text>
+      <text wx:if="{{owner.test}}">{{owner.val}}</text>
+      <view wx:if="{{!owner.test}}">还没有测试过，现在去
+        <text class="link" @tap="gotest">测试</text>
+        吧</view>
+      <!-- <button wx:if="{{!owner.test}}" >测试</button> -->
+    </view>
+    
+
+    <toast />
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  // import List from '../components/list'
+  import Panel from '../components/panel'
+ 
+  // import Counter from '../components/counter'
+  // import Group from '../components/group'
+  import Toast from 'wepy-com-toast'
+  import testMixin from '../mixins/test'
+
+  export default class Info extends wepy.page {
+    config = {
+      navigationBarTitleText: 'tool'
+    }
+    components = {
+      panel: Panel,
+      
+      // counter1: Counter,
+      // counter2: Counter,
+      // list: List,
+      // group: Group,
+      toast: Toast
+    }
+
+    mixins = [testMixin]
+
+    data = {
+      mynum: 20,
+      owner: {
+        test: false,
+        val: 0
+      },
+      daytime: [
+        {val: '0-2'},
+        {val: '2-4'},
+        {val: '4-8'},
+        {val: '>8'}
+      ]
+    }
+
+    computed = {
+      now () {
+        return +new Date()
+      }
+    }
+
+    methods = {
+      gotest() {
+        this.$navigate('./tool', {a: 1, b: 2})
+      },
+      
+      request () {
+        let self = this
+        let i = 10
+        let map = ['MA==', 'MQo=', 'Mg==', 'Mw==', 'NA==', 'NQ==', 'Ng==', 'Nw==', 'OA==', 'OQ==']
+        while (i--) {
+          wepy.request({
+            url: 'https://www.madcoder.cn/tests/sleep.php?time=1&t=css&c=' + map[i] + '&i=' + i,
+            success: function (d) {
+              self.netrst += d.data + '.'
+              self.$apply()
+            }
+          })
+        }
+      },
+      counterEmit (...args) {
+        let $event = args[args.length - 1]
+        console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
+      }
+    }
+
+    events = {
+      'index-emit': (...args) => {
+        let $event = args[args.length - 1]
+        console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
+      }
+    }
+
+    onLoad() {
+      let self = this
+      
+      if (wepy.getStorageSync('owner')) {
+        this.owner = wepy.getStorageSync('owner')
+      }else {
+
+      }
+      
+    }
+  }
+</script>

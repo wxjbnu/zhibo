@@ -1,0 +1,116 @@
+<style lang="less">
+  .label-1, .label-2{
+    margin-bottom: 15px;
+}
+.label-1__text, .label-2__text {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.label-1__icon {
+    position: relative;
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 18px;
+    height: 18px;
+    background: #2f3f02;
+}
+
+.label-1__icon-checked {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 12px;
+    height: 12px;
+    background: #1aad19;
+}
+.label-2__icon {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+    background: #2f3f02;
+    border-radius: 50px;
+}
+
+.label-2__icon-checked {
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    width: 12px;
+    height: 12px;
+    background: #1aad19;
+    border-radius: 50%;
+}
+
+.label-4_text{
+    text-align: center;
+    margin-top: 15px;
+}
+</style>
+<template>
+    <radio-group class="group" bindchange="radioChange" id="{{radioItems.id}}">
+      <repeat for="{{radioItems.list}}"
+        key="index"
+        index="index"
+        item="item">
+        <view class="label-2">
+          <radio id="{{item.name}}"
+            value="{{item.name}}"
+            checked="{{item.checked}}"></radio>
+          <!-- <view class="label-2__icon">
+            <view class="label-2__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
+          </view> -->
+          <label class="label-2__text" for="{{item.name}}"><text>{{radioItems[0].id}}{{item.name}}</text></label>
+        </view>
+      </repeat>
+    </radio-group>
+</template>
+<script>
+  import wepy from 'wepy'
+  // import abc from 'abc'
+
+  export default class ComRadio extends wepy.component {
+    props = {
+      rid: '',
+      radioItems: {
+        type: Object,
+        default: {
+          id: '',
+          list: []
+        },
+        // twoWay: true
+      }
+    }
+
+    data = {
+    }
+    events = {
+      // 'index-broadcast': (...args) => {
+      //   let $event = args[args.length - 1]
+      //   console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
+      // }
+     
+    }
+
+    methods = {
+      radioChange(e) {
+        // console.log(e)
+        this.$emit('radioChange', e)
+      },
+      // plus () {
+      //   this.num = this.num + 1
+      //   console.log(this.$name + ' plus tap')
+
+      //   this.$emit('index-emit', 1, 2, 3)
+      // },
+      // minus () {
+      //   this.num = this.num - 1
+      //   console.log(this.$name + ' minus tap')
+      // }
+    }
+  }
+</script>
