@@ -17,6 +17,7 @@ export default class extends wepy.app {
   config = {
     pages: [
       'pages/index',
+      'pages/video',
       'pages/tool',
       'pages/detail',
       'pages/show',
@@ -41,13 +42,13 @@ export default class extends wepy.app {
       }, {
         selectedIconPath: 'images/test.png',
         iconPath: 'images/test_default.png',
-        pagePath: 'pages/questionnaire',
-        text: '测试'
+        pagePath: 'pages/video',
+        text: '视频锦集'
       }, {
         selectedIconPath: 'images/tool.png',
         iconPath: 'images/tool_default.png',
         pagePath: 'pages/info',
-        text: '我'
+        text: '我的主页'
       }]
     }
   }
@@ -63,6 +64,7 @@ export default class extends wepy.app {
 
   onLaunch() {
     this.testAsync()
+    this.getUserInfo()
   }
 
   sleep(s) {

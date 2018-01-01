@@ -113,6 +113,7 @@
           test: true,
           val: 9999988
         })
+        this.$switch('./info', {})
       },
       toast () {
         let promise = this.$invoke('toast', 'show', {
