@@ -16,10 +16,15 @@
   }
 
   .icon{
-    width: 180rpx;
-    height: 180rpx;
-    border-radius: 90rpx;
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 40rpx;
     border: 1px solid yellow;
+  }
+
+  .flex{
+    display: flex;
+    width: 100%;
   }
 
 </style>
@@ -29,6 +34,18 @@
       <image class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"/>
       <view class="userinfo-nickname">{{ userInfo.nickName }}</view>
     </view>
+    
+    <repeat
+      for="{{userList}}"
+      key="index"
+      index="index"
+      item="item">
+      <view class="flex">
+        <image class="icon" src="{{ userInfo.avatarUrl }}" background-size="cover"/>
+        <view>name</view>
+        <view>{{item.coin}}</view>
+      </view>
+    </repeat>
 
     <image style="width: 100%;" class="" src="{{ bgimg }}" background-size="cover"/>
 
@@ -66,6 +83,9 @@
       userInfo: {
         nickName: '加载中...'
       },
+      userList: [
+        {name: 'www', icon: '', coin: 999999}
+      ],
       bgimg: '../images/test_bg.jpg',
       dataInfo: {
         id: 'dy'
