@@ -32,29 +32,21 @@
     color: #33e;
   }
   .v-card{
-    display: flex;
-    width: 720rpx;
-    flex-direction: row;
-    flex-wrap: wrap;
-    // height: 360rpx;
-    // margin: 20rpx auto 0;
-    // position: relative;
-    // border-radius: 10rpx;
+    width: 640rpx;
+    height: 360rpx;
+    margin: 20rpx auto 0;
+    position: relative;
+    border-radius: 10rpx;
     // border: 1px solid rgb(146, 58, 8);
   }
-  .v-card-list{
-    flex: 0 0 240rpx;
-    height: 320rpx;
-    padding: 10rpx;
-    box-sizing: border-box;
-
-  }
-  .v-card-icon{
-    width: 220rpx;
-    height: 220rpx;
-  }
   .v-card-tt{
-    color: #33e;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50rpx;
+    background: rgba(0, 0, 0, 0.253);
+    color: red;
     text-align: center;
   }
 </style>
@@ -65,25 +57,13 @@
       <view class="userinfo-nickname">{{ userInfo.nickName }}</view>
     </view> -->
     <view class="v-card">
-      <!-- <video style="width:100%;height:100%;"
+      <video style="width:100%;height:100%;"
         objectFit="cover"
         id="myVideo" src="{{src}}"
         danmu-list="{{danmuList}}"
         enable-danmu danmu-btn controls>
-      </video>
-      <text class="v-card-tt">我的视频</text> -->
-      <repeat
-        for="{{list}}"
-        key="index"
-        index="index"
-        item="item">
-        <view class="v-card-list">
-          <image class="v-card-icon" src="{{ item.icon }}" background-size="cover"/>
-          <!-- <view>name</view> -->
-          <view class="v-card-tt">{{item.title}}</view>
-        </view>
-      </repeat>
-      
+    </video>
+      <text class="v-card-tt">我的视频</text>
     </view>
     
     <!-- <live-player/> live-pusher-->
@@ -121,14 +101,16 @@
     data = {
       src: 'http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400',
       mynum: 20,
-      list: [
-        {title: '斗鱼', icon: '../images/dy.jpg', id: 'dy'},
-        // {title: '斗鱼', icon: '../images/dy.jpg', id: 'dy'},
-        // {title: '斗鱼', icon: '../images/dy.jpg', id: 'dy'},
-        // {title: '熊猫', icon: '../images/xm.jpg', id: 'xm'},
-        {title: '熊猫', icon: '../images/xm.jpg', id: 'xm'},
-        {title: '映客', icon: '../images/yk.jpg', id: 'yk'}
-      ],
+      owner: {
+        test: false,
+        val: 0
+      },
+      daytime: [
+        {val: '0-2'},
+        {val: '2-4'},
+        {val: '4-8'},
+        {val: '>8'}
+      ]
     }
 
     computed = {
