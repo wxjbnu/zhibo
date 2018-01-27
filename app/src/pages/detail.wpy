@@ -15,32 +15,64 @@
     color: #aaa;
   }
 
-  .icon{
+  .icon {
+    display: block;
     width: 180rpx;
     height: 180rpx;
+    margin: 20rpx auto;
     border-radius: 90rpx;
     border: 1px solid yellow;
   }
+
+  .detail-icon {}
 
 </style>
 <template>
   <view class="container">
 
-    <panel>
-      <view class="title" slot="title">平台信息</view>
-      <!-- <list></list> -->
-      <view>
-        <image class="icon" src="{{ '../images/' + dataInfo.id + '.jpg' }}" background-size="cover"/>
-      </view>
-      <view>
-        平台：{{dataInfo.name}}
-      </view>
-      <view>
-        规则：{{dataInfo.rule}}
-      </view>
-    </panel>
+    <view class="title" slot="title">平台信息</view>
+    <!-- <list></list> -->
+    <view class="detail-icon">
+      <image class="icon" src="{{dataInfo.id ? '../images/' + dataInfo.id + '.jpg' : ''}}" background-size="cover" />
+    </view>
 
-    <toast />
+    <view style="width: 100%">
+        <repeat for="{{[1,2,3]}}" index="index" item="item" key="key">
+          <xjlist>
+            <view slot="title">平台：</view>
+            <view>什么平台</view>
+            <!-- <view slot="mark">wxj</view> -->
+          </xjlist>
+        </repeat>
+      </view>
+
+    <!-- <view style="width: 100%"></view>
+      <xjcard>
+        <view slot="title">wxj</view>
+        <view style="width: 100%">
+          <repeat for="{{[1,2,3]}}" index="index" item="item" key="key">
+            <xjlist>
+              <view slot="title">平台：</view>
+              <view>什么平台</view>
+              <view slot="mark">wxj</view>
+            </xjlist>
+          </repeat>
+        </view>
+      </xjcard>
+    </view> -->
+
+  <!-- <view>
+    平台：{{dataInfo.name}}
+  </view>
+  <view>
+    规则：{{dataInfo.rule}}
+  </view> -->
+
+
+
+  
+
+  <toast />
   </view>
 </template>
 
@@ -48,6 +80,8 @@
   import wepy from 'wepy'
   // import List from '../components/list'
   import Panel from '../components/panel'
+  import XjCard from '../components/xj_card'
+  import XjList from '../components/xj_list'
   // import Counter from '../components/counter'
   // import Group from '../components/group'
   import Toast from 'wepy-com-toast'
@@ -59,6 +93,9 @@
     }
     components = {
       panel: Panel,
+      xjcard: XjCard,
+      xjlist: XjList,
+
       // counter1: Counter,
       // counter2: Counter,
       // list: List,
@@ -79,7 +116,7 @@
     }
 
     computed = {
-      now () {
+      now() {
         return +new Date()
       }
     }
@@ -96,7 +133,7 @@
     }
 
     onLoad(params, data) {
-      let self = this
+      // let self = this
       console.log(params)
       if (params.id === 'dy') {
         this.dataInfo = {
@@ -119,4 +156,5 @@
       }
     }
   }
+
 </script>

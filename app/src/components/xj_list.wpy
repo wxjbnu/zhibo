@@ -1,0 +1,80 @@
+<style lang="less">
+  .list {
+    width: 100%;
+    border-bottom: 2rpx solid #e1e1e1;
+  }
+  .list:first-child{
+    border-top: 2rpx solid #e1e1e1;
+  }
+  .list-wrap{
+    display: flex;
+    
+    /* box-shadow: 0 2rpx 5rpx rgba(0, 0, 0, 0.3); */
+    /* margin: 30rpx; */
+    padding: 20rpx 30rpx;
+    position: relative;
+    
+    align-items: center;
+    /* border-radius: 5rpx; */
+    font-size: 30rpx;
+    background: #fff;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+  .list-title{
+    /* padding: 20rpx; */
+    font-size: 30rpx;
+    padding-right: 20rpx;
+    /* border-bottom: 2rpx solid #e1e1e1; */
+  }
+  .list-content {
+    flex: 1;
+  }
+
+  .list-mark {
+    /* &:after{
+      content: " ";
+      display: inline-block;
+      height: 18rpx;
+      width: 18rpx;
+      border-width: 6rpx 6rpx 0 0;
+      border-color: #C8C8CD;
+      border-style: solid;
+      -webkit-transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+      transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+      position: relative;
+      top: -6rpx;
+      position: absolute;
+      top: 50%;
+      margin-top: -24rpx;
+      right: 6rpx;
+    } */
+  }
+
+</style>
+<template>
+  <view class="list">
+    <view class="list-wrap">
+      <view class="list-title">
+        <slot name="title">
+          
+        </slot>
+      </view>
+
+      <view class="list-content">
+          <slot></slot>
+      </view>
+
+      <view class="list-mark">
+          <slot name="mark"></slot>
+      </view>
+    </view>
+
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+
+  export default class XjList extends wepy.component {}
+
+</script>
