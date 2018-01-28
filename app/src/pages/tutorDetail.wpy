@@ -1,0 +1,143 @@
+<style lang="less">
+  .userinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tutor-head {
+    width: 180rpx;
+    height: 180rpx;
+    border-radius: 50%;
+  }
+  .tutor-qr{
+    width: 360rpx;
+    height: 360rpx;
+  }
+  .tutor-nickname {
+    padding-left: 20rpx;
+    color: #aaa;
+  }
+
+  .icon{
+    width: 180rpx;
+    height: 180rpx;
+    border-radius: 90rpx;
+    border: 1px solid yellow;
+  }
+
+  .link{
+    border-bottom: 1px solid;
+    color: #33e;
+  }
+  .target-title{
+    padding: 10rpx 20rpx;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .target-score{
+    color: rgb(195, 64, 31);
+  } 
+  </style>
+<template>
+  <view class="container">
+      <!-- 导师列表 -->
+      <view>
+        <text style="">导师介绍</text>
+      </view>
+      <view style="margin-top: 20rpx;">
+        <image class="tutor-head" src="{{tutorInfo.headimg}}" background-size="cover"/>
+        <text style="text-align:center;">{{tutorInfo.name}}</text>
+      </view>
+      <view style="margin-top: 20rpx;">
+          <text style="margin-bottom: 20rpx;">添加导师</text>
+        <!-- <image class="tutor-qr" src="{{tutorInfo.qr}}" mode="aspectFit"/> -->
+        <image class="tutor-qr" src="https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=7bcb659c9745d688a302b5a29cf91a23/2934349b033b5bb571dc8c5133d3d539b600bc12.jpg" mode="aspectFit"/>
+        
+      </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import Panel from '../components/panel'
+  import XjList from '../components/xj_list'
+  import testMixin from '../mixins/test'
+
+  export default class TutorDetail extends wepy.page {
+    config = {
+      navigationBarTitleText: 'tool'
+    }
+    components = {
+      panel: Panel,
+      xjlist: XjList,
+      // counter1: Counter,
+      // counter2: Counter,
+      // list: List,
+      // group: Group,
+      // toast: Toast
+    }
+
+    mixins = [testMixin]
+
+    data = {
+      tutorInfo: {
+        name: 'Steve',
+        qr: '../images/qr.jpg',
+        headimg: 'http://demo.mycodes.net/shouji/qinggong/img/timg.jpeg'
+      },
+      userRecord:{
+        score: 200,
+      },
+      tutorList: [
+        {name: 'Steve', headimg: 'http://demo.mycodes.net/shouji/qinggong/img/timg.jpeg'},
+      ],
+   
+    }
+
+    computed = {
+      now () {
+        return +new Date()
+      }
+    }
+
+    methods = {
+      gotest() {
+        this.$navigate('./tool', {a: 1, b: 2})
+      },
+      doTarget(e) {
+        if (e.type === 1) {
+          // 签到成功
+          this.userRecord.score += e.score
+          this.targetList.map((res) => {
+            if (res.type == e.type) {
+              res.done = true
+            }
+          })
+        }
+        this.$apply()
+      },
+      add() {
+        this.userRecord.score = 1
+      }
+
+    }
+
+    onShow() {
+      // this.userInfo = Object.assign(this.userInfo, this.$parent.globalData.userInfo)
+      if (wepy.getStorageSync('owner')) {
+        this.owner = wepy.getStorageSync('owner')
+      }else {
+
+      }
+    }
+    onLoad() {
+      // let self = this
+      this.userInfo = this.$parent.globalData.userInfo
+      // console.log(this.userInfo)
+      
+      
+      
+    }
+  }
+</script>

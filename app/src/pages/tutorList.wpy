@@ -1,0 +1,137 @@
+<style lang="less">
+  .userinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tutor-head {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+  }
+
+  .tutor-nickname {
+    padding-left: 20rpx;
+    color: #aaa;
+  }
+
+  .icon{
+    width: 180rpx;
+    height: 180rpx;
+    border-radius: 90rpx;
+    border: 1px solid yellow;
+  }
+
+  .link{
+    border-bottom: 1px solid;
+    color: #33e;
+  }
+  .target-title{
+    padding: 10rpx 20rpx;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .target-score{
+    color: rgb(195, 64, 31);
+  } 
+  </style>
+<template>
+  <view class="container" style="">
+
+      <!-- 导师列表 -->
+      <view style="width: 100%;margin-top:20rpx;">
+        <view class="target-title">
+          <text>导师列表</text>
+        </view>
+        <view>
+          <repeat for="{{tutorList}}" index="index" item="item" key="key">
+              <xjlist>
+                <view slot="title">
+                  <image class="tutor-head" src="{{item.headimg}}" background-size="cover"/>
+                </view>
+                <view class="tutor-nickname">
+                    {{item.name}}
+                </view>
+                <view slot="mark">
+                    <button size="mini"
+                      @tap="doTarget({{item}})"
+                      disabled="{{false}}"
+                      type="primary">呼叫</button>
+                </view>
+              </xjlist>
+            </repeat>
+        </view>
+      </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import Panel from '../components/panel'
+  import XjList from '../components/xj_list'
+  import testMixin from '../mixins/test'
+
+  export default class TutorList extends wepy.page {
+    config = {
+      navigationBarTitleText: 'tool'
+    }
+    components = {
+      panel: Panel,
+      xjlist: XjList,
+      // counter1: Counter,
+      // counter2: Counter,
+      // list: List,
+      // group: Group,
+      // toast: Toast
+    }
+
+    mixins = [testMixin]
+
+    data = {
+      userInfo: {
+        nickName: ''
+      },
+      userRecord:{
+        score: 200,
+      },
+      tutorList: [
+        {name: 'Steve', headimg: 'http://demo.mycodes.net/shouji/qinggong/img/timg.jpeg'},
+      ],
+   
+    }
+
+    computed = {
+      now () {
+        return +new Date()
+      }
+    }
+
+    methods = {
+      gotest() {
+        this.$navigate('./tool', {a: 1, b: 2})
+      },
+      doTarget(e) {
+        this.$navigate('./tutorDetail', {info: e})
+      },
+
+    }
+
+    onShow() {
+      // this.userInfo = Object.assign(this.userInfo, this.$parent.globalData.userInfo)
+      if (wepy.getStorageSync('owner')) {
+        this.owner = wepy.getStorageSync('owner')
+      }else {
+
+      }
+    }
+    onLoad() {
+      // let self = this
+      this.userInfo = this.$parent.globalData.userInfo
+      // console.log(this.userInfo)
+      
+      
+      
+    }
+  }
+</script>

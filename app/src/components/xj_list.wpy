@@ -8,7 +8,8 @@
   }
   .list-wrap{
     display: flex;
-    
+    flex-direction:row;
+
     /* box-shadow: 0 2rpx 5rpx rgba(0, 0, 0, 0.3); */
     /* margin: 30rpx; */
     padding: 20rpx 30rpx;
@@ -55,19 +56,19 @@
 <template>
   <view class="list">
     <view class="list-wrap">
-      <view class="list-title">
+      <!-- <view class="list-title"> -->
         <slot name="title">
           
         </slot>
-      </view>
+      <!-- </view> -->
 
       <view class="list-content">
           <slot></slot>
       </view>
 
-      <view class="list-mark">
+      <!-- <view class="list-mark"> -->
           <slot name="mark"></slot>
-      </view>
+      <!-- </view> -->
     </view>
 
   </view>

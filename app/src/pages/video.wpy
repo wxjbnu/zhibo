@@ -36,11 +36,11 @@
     width: 720rpx;
     flex-direction: row;
     flex-wrap: wrap;
-    // height: 360rpx;
-    // margin: 20rpx auto 0;
-    // position: relative;
-    // border-radius: 10rpx;
-    // border: 1px solid rgb(146, 58, 8);
+    /* height: 360rpx;
+    margin: 20rpx auto 0;
+    position: relative;
+    border-radius: 10rpx;
+    border: 1px solid rgb(146, 58, 8); */
   }
   .v-card-list{
     flex: 0 0 240rpx;
@@ -83,12 +83,15 @@
           <view class="v-card-tt">{{item.title}}</view>
         </view>
       </repeat>
-      
+    </view>
+
+    <view style="width: 100%;">
+      <button style="width: 100%;" @tap="goTutor">了解导师</button>
     </view>
     
     <!-- <live-player/> live-pusher-->
     <!-- <live-pusher url="https://domain/push_stream" mode="RTC" autopush bindstatechange="statechange" style="width: 300px; height: 225px;border:1px solid red;" /> -->
-    <toast />
+    <!-- <toast /> -->
   </view>
 </template>
 
@@ -143,6 +146,9 @@
       },
       gotest() {
         this.$navigate('./tool', {a: 1, b: 2})
+      },
+      goTutor() {
+        this.$navigate('./tutorList', {a: 1, b: 2})
       },
   
       request () {

@@ -1,4 +1,8 @@
 <style lang="less">
+  view{
+    display: flex;
+    flex-direction: column;
+  }
 .container {
   height: 100%;
   display: flex;
@@ -16,12 +20,16 @@ import 'wepy-async-function'
 export default class extends wepy.app {
   config = {
     pages: [
-      'pages/index',
+      // 'pages/index',
       'pages/video',
       'pages/tool',
       'pages/detail',
       'pages/show',
       'pages/questionnaire',
+      'pages/tutorList',
+      'pages/tutorDetail',
+      
+      
       'pages/info'
     ],
     window: {
@@ -34,12 +42,14 @@ export default class extends wepy.app {
       color: '#a9b7b7',
       selectedColor: '#11cd6e',
       borderStyle: 'white',
-      list: [{
-        selectedIconPath: 'images/home.png',
-        iconPath: 'images/home_default.png',
-        pagePath: 'pages/index',
-        text: '首页'
-      }, {
+      list: [
+      //   {
+      //   selectedIconPath: 'images/home.png',
+      //   iconPath: 'images/home_default.png',
+      //   pagePath: 'pages/index',
+      //   text: '首页'
+      // }, 
+      {
         selectedIconPath: 'images/test.png',
         iconPath: 'images/test_default.png',
         pagePath: 'pages/video',
@@ -63,7 +73,7 @@ export default class extends wepy.app {
   }
 
   onLaunch() {
-    this.testAsync()
+    // this.testAsync()
     this.getUserInfo()
   }
 
